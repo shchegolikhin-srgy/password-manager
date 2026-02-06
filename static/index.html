@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Менеджер паролей</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="/style.css" />
+</head>
+
+<body>
+    <div id="auth-pages">
+        <div class="auth-container">
+            <div class="auth-left">
+                <div class="auth-logo">
+                    <span class="material-symbols-outlined">key</span>
+                </div>
+                <h1 class="auth-title">Password Manager</h1>
+                <p>Безопасное хранение ваших паролей</p>
+                <div style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.8;">
+                    <p>✓ Управление доверенными устройствами</p>
+                    <p>✓ Возможность добавлять избранные пароли</p>
+                    <p>✓ Быстро и удобно и бесплатно</p>
+                    <p>✓ Сквозное шифрование AES-GCM</p>
+                </div>
+            </div>
+            <div class="auth-right">
+                <div class="auth-card">
+                    <div id="login-form">
+                        <div class="auth-logo" style="font-size: 2rem; margin-bottom: 1rem;">
+                            <span class="material-symbols-outlined">login</span>
+                        </div>
+                        <h2 class="auth-title">Вход в аккаунт</h2>
+                        <p class="auth-subtitle">Введите свои данные для входа</p>
+                        <div class="form-group">
+                            <label class="form-label">Имя пользователя</label>
+                            <input type="text" id="login-username" class="form-control"
+                                placeholder="Введите имя пользователя" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Пароль</label>
+                            <input type="password" id="login-password" class="form-control" placeholder="Введите пароль"
+                                required>
+                        </div>
+                        <button id="login-submit" class="btn">
+                            <span id="login-text">Войти</span>
+                            <span id="login-loading" class="loading" style="display: none;"></span>
+                        </button>
+                        <div class="auth-link">
+                            Нет аккаунта? <a href="#" id="show-register">Зарегистрироваться</a>
+                        </div>
+                    </div>
+                    <div id="register-form" style="display: none;">
+                        <div class="auth-logo" style="font-size: 2rem; margin-bottom: 1rem;">
+                            <span class="material-symbols-outlined">person_add</span>
+                        </div>
+                        <h2 class="auth-title">Создать аккаунт</h2>
+                        <p class="auth-subtitle">Введите данные для регистрации</p>
+                        <div class="form-group">
+                            <label class="form-label">Имя пользователя</label>
+                            <input type="text" id="register-username" class="form-control"
+                                placeholder="Введите имя пользователя" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Пароль</label>
+                            <input type="password" id="register-password" class="form-control"
+                                placeholder="Введите пароль" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Подтверждение пароля</label>
+                            <input type="password" id="register-confirm-password" class="form-control"
+                                placeholder="Подтвердите пароль" required>
+                        </div>
+                        <button id="register-submit" class="btn">
+                            <span id="register-text">Зарегистрироваться</span>
+                            <span id="register-loading" class="loading" style="display: none;"></span>
+                        </button>
+                        <div class="auth-link">
+                            Уже есть аккаунт? <a href="#" id="show-login">Войти</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="app-layout" class="app-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo"><span class="material-symbols-outlined">key</span></div>
+                <span>Менеджер паролей</span>
+            </div>
+            <nav class="sidebar-menu">
+                <a href="#" class="menu-item active" data-page="passwords">
+                    <i><span class="material-symbols-outlined">password</span></i> <span>Мои пароли</span>
+                </a>
+                <a href="#" class="menu-item" data-page="favorites">
+                    <i><span class="material-symbols-outlined">star</span></i> <span>Избранное</span>
+                </a>
+                <a href="#" class="menu-item" data-page="devices">
+                    <i><span class="material-symbols-outlined">devices</span></i> <span>Устройства</span>
+                </a>
+                <a href="#" class="menu-item" data-page="settings">
+                    <i><span class="material-symbols-outlined">settings</span></i> <span>Настройки</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-avatar">С</div>
+                <div>
+                    <div id="sidebar-username">Сергей</div>
+                    <span class="material-symbols-outlined">verified_user</span>
+                </div>
+            </div>
+        </aside>
+        <div class="main-content">
+            <header class="topbar">
+                <div class="hamburger">☰</div>
+                <div class="topbar-title" id="page-title">Панель управления</div>
+                <div class="topbar-actions">
+                    <button class="btn btn-outline" id="logout-btn">
+                        <span class="material-symbols-outlined">
+                        logout
+                        </span></button>
+                </div>
+            </header>
+            <main class="content-area">
+                <section id="passwords-page" class="page active">
+                    <div class="page-header">
+                        <h1 class="page-title">Мои пароли</h1>
+                        <p class="page-subtitle">Управление вашими учетными данными</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Добавить новый пароль</h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="add-password-form">
+                                <div class="form-group">
+                                    <label class="form-label">Сервис</label>
+                                    <input type="text" id="new-service" class="form-control"
+                                        placeholder="Например: Gmail, Facebook" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Имя пользователя / Email</label>
+                                    <input type="text" id="new-username" class="form-control"
+                                        placeholder="user@example.com" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Пароль</label>
+                                    <div class="password-input-group">
+                                        <input type="password" id="new-password" class="form-control"
+                                            placeholder="Введите пароль" required>
+
+                                    </div>
+                                    <button type="button" class="btn btn-secondary"
+                                            id="generate-password-btn">Сгенерировать</button>
+                                </div>
+                                <button type="submit" class="btn">Сохранить пароль</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Список паролей</h3>
+                            <div class="search-bar">
+                                <input type="text" id="search-input" class="form-control" placeholder="Поиск...">
+                            </div>
+                        </div>
+                        <ul id="password-list" class="list">
+                            <li class="list-item">
+                                <div class="item-info">
+                                    <div class="item-title">Загрузка...</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                <section id="favorites-page" class="page">
+                    <div class="page-header">
+                        <h1 class="page-title">Избранные пароли</h1>
+                        <p class="page-subtitle">Пароли, помеченные как важные</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Избранные учетные данные</h3>
+                        </div>
+                        <ul id="favorites-list" class="list">
+                            <li class="list-item">
+                                <div class="item-info">
+                                    <div class="item-title">Загрузка...</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                <section id="devices-page" class="page">
+                    <div class="page-header">
+                        <h1 class="page-title">Устройства</h1>
+                        <p class="page-subtitle">Управление доверенными устройствами и историей входов</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Доверенные устройства</h3>
+                        </div>
+                        <ul id="trusted-devices-list" class="list">
+                            <li class="list-item">
+                                <div class="item-info">
+                                    <div class="item-title">Загрузка...</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Текущее устройство</h3>
+                        </div>
+                        <div class="card-body">
+                            <button class="btn btn-primary" id="trust-current-device-btn">Доверять этому
+                                устройству</button>
+                            <p class="item-subtitle mt-2">Это действие добавит текущее устройство в список доверенных
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">История входов</h3>
+                        </div>
+                        <ul id="history-list" class="list">
+                            <li class="list-item">
+                                <div class="item-info">
+                                    <div class="item-title">Загрузка...</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                <section id="settings-page" class="page">
+                    <div class="page-header">
+                        <h1 class="page-title">Настройки</h1>
+                        <p class="page-subtitle">Управление настройками аккаунта</p>
+                    </div>
+                    <div class="card">
+                        <div class="profile-info">
+                            <div>
+                                <div class="profile-avatar">С</div>
+                            </div>
+                            <div class="profile-details">
+                                <div class="detail-row">
+                                    <div class="detail-label">Имя пользователя:</div>
+                                    <div class="detail-value" id="profile-username">Сергей</div>
+                                </div>
+                                <div class="detail-row">
+                                    <div class="detail-label">Email:</div>
+                                    <div class="detail-value" id="profile-email">Не указано</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Изменить профиль</h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="update-profile-form">
+                                <div class="form-group">
+                                    <label class="form-label">Имя пользователя</label>
+                                    <input type="text" id="update-username" class="form-control" value="Сергей">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" id="update-email" class="form-control" value="user@example.com">
+                                </div>
+                                <button type="submit" class="btn">Сохранить изменения</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Безопасность</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label class="form-label">Текущий пароль</label>
+                                <input type="password" class="form-control" placeholder="Введите текущий пароль">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Новый пароль</label>
+                                <input type="password" class="form-control" placeholder="Введите новый пароль">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Подтвердите новый пароль</label>
+                                <input type="password" class="form-control" placeholder="Подтвердите новый пароль">
+                            </div>
+                            <button class="btn">Изменить пароль</button>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+    <div id="notification-container"></div>
+    <script src="https://cdn.jsdelivr.net/npm/ua-parser-js@2.0.0/dist/ua-parser.min.js"></script>
+    <script src="/app.js"></script>
+</body>
+</html>
