@@ -10,7 +10,6 @@ import os
 from cryptography.fernet import Fernet
 import base64
 import hashlib
-import boto3
 from dotenv import load_dotenv
 
 
