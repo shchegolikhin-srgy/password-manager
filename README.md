@@ -10,3 +10,4 @@ cd password-manager-python
 cp .env.example .env
 docker-compose up -d
 ```
+ссылка на сайт: https://p.nulldomain.ru/
